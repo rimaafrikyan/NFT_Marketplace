@@ -14,8 +14,8 @@ const double KHeightBottomBar = 60.0;
 const screens = [NFTMarketplaceScreen(), StatsScreen()];
 
 // Color
-const Color primaryColor = Color(0xFF996EFF);
-const Color backgroundColor = Color(0xff211134);
+const Color primaryColor = Color.fromARGB(255, 110, 116, 241);
+const Color backgroundColor =Color.fromARGB(255, 11, 13, 26);
 
 // Padding
 const double kDefaultExThinPadding = 8.0;
@@ -38,8 +38,6 @@ final themeCardModels = [
   ),
   ThemeCardModel(
     imageUrl: "assets/music.jpg",
-
-    // imageUrl: "assets/alexander-shatov-JlO3-oY5ZlQ-unsplash.jpg",
     title: "Music",
   ),
   ThemeCardModel(
@@ -137,9 +135,7 @@ final rankingCards = [
   ),
   RankingCardModel(
     name: 'Famous Person',
-    // imageUrl: 'assets/nft.jpg',
     imageUrl: 'assets/nft_sell_3.jpg',
-
     ether: 22341.1,
     percent: 77.9,
   ),
@@ -157,7 +153,7 @@ final rankingCards = [
   ),
   RankingCardModel(
     name: 'Famous Person',
-    imageUrl: 'assets/yalamber-limbu-DS2ZIDNxWgk-unsplash.jpg',
+    imageUrl: 'assets/nft_sell_1.jpg',
     ether: 22341.1,
     percent: 18.9,
   ),

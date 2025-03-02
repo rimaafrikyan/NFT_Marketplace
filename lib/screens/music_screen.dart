@@ -93,7 +93,7 @@ class MusicScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // backgroundColor: Color(0xfff4f6f8),
-      backgroundColor: Color(0xff211134),
+      backgroundColor: Color.fromARGB(255, 11, 13, 26),
        appBar: AppBar(
         title: Text(
           'Music',
@@ -104,13 +104,12 @@ class MusicScreen extends StatelessWidget {
             
           ),
         ),
-        centerTitle: true, // Կենտրոնացնել տեքստը
+        centerTitle: true, 
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white), // Ավելացնել 아이քոն
+          icon: Icon(Icons.arrow_back, color: Colors.white), 
           onPressed: () {
-            // Նավիգացիա դեպի Home էջ
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => HomeScreen()),

@@ -15,7 +15,7 @@ class IntroduceScreen extends StatelessWidget {
             width: double.infinity,
             height: double.infinity,
             child: Image.asset(
-              "assets/background_Img.jpg",
+              "assets/background.jpg",
               fit: BoxFit.cover,
             ),
           ),
@@ -64,15 +64,17 @@ class IntroduceScreen extends StatelessWidget {
                           radius: 50,
                           child: TextButton(
                             onPressed: () {
-                              Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const HomeScreen(),
-                              ),
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomeScreen(),
+                                ),
                               );
                             },
                             child: Container(
                               padding: const EdgeInsets.symmetric(
                                   vertical: kDefaultExThinPadding,
-                                  horizontal: kDefaultPadding
-                                  ),
+                                  horizontal: kDefaultPadding),
                               child: const Text(
                                 "Get started now",
                                 style: TextStyle(
