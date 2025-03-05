@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:nftmarketplacee/screens/home_screen.dart';
 
-class ArtScreen extends StatelessWidget {
+class ArtScreen extends StatefulWidget {
+  const ArtScreen({super.key});
+
+  @override
+  State<ArtScreen> createState() => _ArtScreenState();
+}
+
+class _ArtScreenState extends State<ArtScreen> {
   final List<Map<String, String>> artItems = [
     {
       'image': 'assets/art1.jpg',
@@ -41,52 +48,109 @@ class ArtScreen extends StatelessWidget {
     },
   ];
 
+  final TextEditingController _searchController = TextEditingController();
+  List<Map<String, String>> filteredArtItems = [];
+
+  @override
+  void initState() {
+    super.initState();
+    filteredArtItems = List.from(artItems);
+    _searchController.addListener(_filterArtItems);
+  }
+
+  void _filterArtItems() {
+    final query = _searchController.text.toLowerCase();
+    setState(() {
+      filteredArtItems = artItems
+          .where((item) =>
+              item['title']!.toLowerCase().contains(query) ||
+              item['artist']!.toLowerCase().contains(query))
+          .toList();
+    });
+  }
+
+  @override
+  void dispose() {
+    _searchController.removeListener(_filterArtItems);
+    _searchController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 11, 13, 26),
-       appBar: AppBar(
-        title: Text(
-          'Art',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 24.0,
-            fontWeight: FontWeight.bold,
+      backgroundColor: const Color.fromARGB(255, 11, 13, 26),
+      appBar: AppBar(
+        title: Padding(
+          padding: const EdgeInsets.only(top: 20),
+          child: Text(
+            'Art NFTs',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24.0,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
-        centerTitle: true, 
+        centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(Icons.arrow_back, color: Colors.white),
           onPressed: () {
             Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => HomeScreen()),
+              MaterialPageRoute(builder: (context) => const HomeScreen()),
             );
           },
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: GridView.builder(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, 
-            crossAxisSpacing: 16.0, 
-            mainAxisSpacing: 16.0, 
-            childAspectRatio: 0.7, 
-          ),
-          
-          itemCount: artItems.length,
-          itemBuilder: (context, index) {
-            final item = artItems[index];
-            return ArtItemCard(
-              image: item['image']!,
-              title: item['title']!,
-              artist: item['artist']!,
-              price: item['price']!,
-            );
-          },
+        child: Column(
+          children: [
+            // Search Bar
+            Padding(
+              padding: const EdgeInsets.only(bottom: 16.0),
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  hintText: "Search artworks...",
+                  hintStyle: const TextStyle(color: Colors.white54),
+                  filled: true,
+                  fillColor: Colors.white.withOpacity(0.1),
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
+                  ),
+                  prefixIcon: const Icon(Icons.search, color: Colors.white54),
+                ),
+                style: const TextStyle(color: Colors.white),
+              ),
+            ),
+
+            // Art Grid
+            Expanded(
+              child: GridView.builder(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 16.0,
+                  mainAxisSpacing: 16.0,
+                  childAspectRatio: 0.7,
+                ),
+                itemCount: filteredArtItems.length,
+                itemBuilder: (context, index) {
+                  final item = filteredArtItems[index];
+                  return ArtItemCard(
+                    image: item['image']!,
+                    title: item['title']!,
+                    artist: item['artist']!,
+                    price: item['price']!,
+                  );
+                },
+              ),
+            ),
+          ],
         ),
       ),
     );
@@ -113,14 +177,15 @@ class ArtItemCard extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12.0),
       ),
-      color:  Colors.white.withOpacity(0.1),
+      color: Colors.white.withOpacity(0.1),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          
+          // Art Image
           Expanded(
             child: ClipRRect(
-              borderRadius: BorderRadius.vertical(top: Radius.circular(12.0)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(12.0)),
               child: Image.asset(
                 image,
                 fit: BoxFit.cover,
@@ -128,37 +193,36 @@ class ArtItemCard extends StatelessWidget {
               ),
             ),
           ),
-          
+
+          // Art Details
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              
               children: [
                 Text(
                   title,
-                  style: TextStyle(
-                    color: Colors.black,
+                  style: const TextStyle(
+                    color: Colors.white,
                     fontSize: 16.0,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
-                SizedBox(height: 4.0),
+                const SizedBox(height: 4.0),
                 Text(
                   'By $artist',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14.0,
-                    color: const Color.fromARGB(255, 188, 182, 182),
+                    color: Colors.white70,
                   ),
                 ),
-                SizedBox(height: 4.0),
+                const SizedBox(height: 4.0),
                 Text(
                   price,
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 14.0,
                     fontWeight: FontWeight.bold,
-                    color: const Color.fromARGB(255, 180, 175, 175),
-
+                    color: Colors.white70,
                   ),
                 ),
               ],

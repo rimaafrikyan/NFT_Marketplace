@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:nftmarketplacee/config/constants.dart';
 import 'package:nftmarketplacee/models/nft_card_widget.dart';
+import 'package:nftmarketplacee/screens/fashion_screen.dart';
 import 'package:nftmarketplacee/screens/music_screen.dart';
 import 'package:nftmarketplacee/widgets/glassmorphism.dart';
 import 'package:nftmarketplacee/widgets/theme_card_widget.dart';
@@ -58,7 +59,14 @@ class NFTMarketplaceScreen extends StatelessWidget {
                           builder: (context) => MusicScreen(),
                         ),
                       );
-                    }
+                    }else if(themeCardModels[index].title == "Fashion"){
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => FashionScreen(),
+                        ),
+                      );
+                    };
                   },
                 ),
               ),

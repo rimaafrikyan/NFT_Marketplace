@@ -23,7 +23,7 @@ class RankingCard extends StatelessWidget {
     return Row(
       children: [
         Text(
-          '$index',
+           '${index + 1}',
           style: TextStyle(
             color: Colors.white.withOpacity(0.8),
           ),
@@ -64,13 +64,13 @@ class RankingCard extends StatelessWidget {
         ),
         const Spacer(),
         Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Text(
-              ' $ether',
+              ' $ether  ETH',
               style: TextStyle(
                 color: Colors.white,
-                fontSize: 16,
+                fontSize: 15,
               ),
             ),
             const Spacer(),

@@ -41,7 +41,7 @@ final themeCardModels = [
     title: "Music",
   ),
   ThemeCardModel(
-    imageUrl: "assets/fashion.jpg",
+    imageUrl: "assets/Fashion.jpg",
     title: "Fashion",
   ),
 ];
@@ -58,12 +58,12 @@ final trendingCards = [
     favoriteNumber: 700,
   ),
   NftCardModel(
-    name: '3D Art',
+    name: 'Person',
     imageUrl: 'assets/nft2.jpg',
     favoriteNumber: 900,
   ),
   NftCardModel(
-    name: 'Joker Art',
+    name: 'Person',
     imageUrl: 'assets/nft3.jpg',
     favoriteNumber: 200,
   ),
@@ -80,7 +80,7 @@ final topsellCards = [
     favoriteNumber: 700,
   ),
   NftCardModel(
-    name: '3D Art',
+    name: 'Person',
     imageUrl: 'assets/nft_sell_3.jpg',
     favoriteNumber: 900,
   ),
